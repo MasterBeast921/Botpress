@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Optimize and compress your images and videos online with our futuristic compression tool. Maintain quality while reducing file size.">
+    <meta name="keywords" content="image compression, video compression, optimize images, compress videos online">
+    <meta name="author" content="Your Name">
+    <title>Futuristic Image & Video Compression Tool</title>
+    <style>
+        /* CSS Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        header {
+            background-color: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            color: #4CAF50;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #compression-tool {
+            background-color: rgba(44, 44, 44, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #compression-tool h2 {
+            margin-top: 0;
+            font-size: 28px;
+            color: #4CAF50;
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+
+        #compression-tool input[type="file"] {
+            display: none;
+        }
+
+        .file-upload-label {
+            display: block;
+            margin: 15px 0;
+            padding: 20px;
+            border: 2px dashed #4CAF50;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+
+        .file-upload-label:hover {
+            background-color: rgba(76, 175, 80, 0.2);
+            border-color: #45a049;
+        }
+
+        #compression-tool label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: 500;
+            color: #e0e0e0;
+        }
+
+        #compression-tool select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #555;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            background-color: rgba(58, 58, 58, 0.8);
+            color: #e0e0e0;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.3s ease;
+        }
+
+        #compression-tool select:hover {
+            border-color: #4CAF50;
+        }
+
+        #compression-tool button {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        #compression-tool button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.6);
+        }
+
+        #output-container {
+            margin-top: 20px;
+        }
+
+        .output-item {
+            margin-bottom: 20px;
+            background-color: rgba(44, 44, 44, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .output-item h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            color: #4CAF50;
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+
+        .output-item img, .output-item video {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .output-item a {
+            display: inline-block;
+            margin-top: 10px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .output-item a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.6);
+        }
+
+        footer {
+            background-color: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            color: #e0e0e0;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Futuristic Image & Video Compression Tool</h1>
+    </header>
+
+    <main>
+        <!-- Compression Tool -->
+        <section id="compression-tool">
+            <h2>Compress Your Files</h2>
+            <label for="file-input" class="file-upload-label">Choose Images or Videos</label>
+            <input type="file" id="file-input" accept="image/*, video/*" multiple>
+            <label for="compression-level">Compression Level:</label>
+            <select id="compression-level">
+                <option value="0.1">Low</option>
+                <option value="0.5">Medium</option>
+                <option value="0.9">High</option>
+            </select>
+            <button id="compress-btn">Compress Files</button>
+            <div id="output-container"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Futuristic Compression Tool. All rights reserved.</p>
+    </footer>
+
+    <!-- FFmpeg.js Library -->
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.0/dist/ffmpeg.min.js"></script>
+    <script>
+        // JavaScript Functionality
+        const { createFFmpeg, fetchFile } = FFmpeg;
+        const ffmpeg = createFFmpeg({ log: true });
+
+        const fileInput = document.getElementById('file-input');
+        const outputContainer = document.getElementById('output-container');
+        const compressBtn = document.getElementById('compress-btn');
+        const compressionLevel = document.getElementById('compression-level');
+
+        compressBtn.addEventListener('click', async () => {
+            if (fileInput.files.length === 0) {
+                alert('Please select at least one file.');
+                return;
+            }
+
+            outputContainer.innerHTML = '';
+            const level = parseFloat(compressionLevel.value);
+
+            for (const file of fileInput.files) {
+                const fileType = file.type.split('/')[0]; // 'image' or 'video'
+                const outputItem = document.createElement('div');
+                outputItem.className = 'output-item';
+                outputItem.innerHTML = `<h3>${file.name}</h3>`;
+                outputContainer.appendChild(outputItem);
+
+                if (fileType === 'image') {
+                    // Image Compression (Lossless for PNG, Minimal for JPEG)
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = new Image();
+                        img.src = e.target.result;
+
+                        img.onload = () => {
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+                            canvas.width = img.width;
+                            canvas.height = img.height;
+                            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                            canvas.toBlob((blob) => {
+                                const compressedUrl = URL.createObjectURL(blob);
+                                outputItem.innerHTML += `
+                                    <img src="${compressedUrl}" alt="Compressed Image">
+                                    <a href="${compressedUrl}" download="${file.name.replace(/\.[^/.]+$/, '')}_compressed.png">Download Compressed Image</a>
+                                `;
+                            }, file.type === 'image/png' ? 'image/png' : 'image/jpeg', level);
+                        };
+                    };
+                    reader.readAsDataURL(file);
+                } else if (fileType === 'video') {
+                    // Video Compression (Preserve Quality with Bitrate Control)
+                    if (!ffmpeg.isLoaded()) {
+                        await ffmpeg.load();
+                    }
+
+                    const originalUrl = URL.createObjectURL(file);
+                    outputItem.innerHTML += `<video src="${originalUrl}" controls></video>`;
+
+                    ffmpeg.FS('writeFile', 'input.mp4', await fetchFile(file));
+                    await ffmpeg.run('-i', 'input.mp4', '-b:v', '1M', '-c:v', 'libx264', 'output.mp4');
+                    const data = ffmpeg.FS('readFile', 'output.mp4');
+                    const compressedUrl = URL.createObjectURL(new Blob([data.buffer], { type: 'video/mp4' }));
+                    outputItem.innerHTML += `
+                        <video src="${compressedUrl}" controls></video>
+                        <a href="${compressedUrl}" download="${file.name.replace(/\.[^/.]+$/, '')}_compressed.mp4">Download Compressed Video</a>
+                    `;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

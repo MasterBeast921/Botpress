@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Compress multiple PDF files online easily and quickly without losing quality.">
-    <meta name="keywords" content="PDF Compressor, compress PDF, reduce PDF size, multiple PDFs">
+    <meta name="description" content="Compress your PDF files online easily and quickly without losing quality.">
+    <meta name="keywords" content="PDF Compressor, compress PDF, reduce PDF size">
     <meta name="author" content="Your Name">
     <title>PDF Compressor - Online Tools Hub</title>
     <style>
@@ -132,6 +132,25 @@
             background-color: #45a049;
         }
 
+        .download-link {
+            margin-top: 20px;
+            display: none; /* Hidden by default */
+        }
+
+        .download-link a {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-link a:hover {
+            background-color: #45a049;
+        }
+
         footer {
             background-color: #121212;
             color: #e0e0e0;
@@ -154,11 +173,14 @@
 
     <main>
         <section class="upload-section">
-            <h2>Compress Your PDFs</h2>
-            <label for="pdf-upload">Choose PDF Files</label>
-            <input type="file" id="pdf-upload" accept="application/pdf" multiple>
+            <h2>Compress Your PDF</h2>
+            <label for="pdf-upload">Choose PDF File</label>
+            <input type="file" id="pdf-upload" accept="application/pdf">
             <div class="file-list" id="file-list"></div>
-            <button class="compress-btn" id="compress-btn">Compress PDFs</button>
+            <button class="compress-btn" id="compress-btn">Compress PDF</button>
+            <div class="download-link" id="download-link">
+                <a href="#" id="download-btn">Download Compressed PDF</a>
+            </div>
         </section>
     </main>
 
@@ -167,57 +189,58 @@
     </footer>
 
     <script>
-        // JavaScript for PDF Compression
+        // JavaScript for PDF Compression and Download
         const fileInput = document.getElementById('pdf-upload');
         const fileList = document.getElementById('file-list');
         const compressBtn = document.getElementById('compress-btn');
+        const downloadLink = document.getElementById('download-link');
+        const downloadBtn = document.getElementById('download-btn');
 
-        let files = [];
+        let file = null;
 
         fileInput.addEventListener('change', function(event) {
-            files = Array.from(event.target.files);
+            file = event.target.files[0];
             updateFileList();
         });
 
         function updateFileList() {
             fileList.innerHTML = '';
-            files.forEach((file, index) => {
+            if (file) {
                 const fileItem = document.createElement('div');
                 fileItem.className = 'file-item';
                 fileItem.innerHTML = `
                     <span>${file.name}</span>
-                    <button onclick="removeFile(${index})">Remove</button>
+                    <button onclick="removeFile()">Remove</button>
                 `;
                 fileList.appendChild(fileItem);
-            });
+            }
         }
 
-        function removeFile(index) {
-            files.splice(index, 1);
+        function removeFile() {
+            file = null;
             updateFileList();
         }
 
         compressBtn.addEventListener('click', function() {
-            if (files.length === 0) {
-                alert('Please select at least one PDF file.');
+            if (!file) {
+                alert('Please select a PDF file.');
                 return;
             }
 
-            const formData = new FormData();
-            files.forEach((file, index) => {
-                formData.append(`file${index}`, file);
-            });
-
-            // Simulate compression (replace with actual API call)
+            // Simulate compression process
             compressBtn.textContent = 'Compressing...';
             compressBtn.disabled = true;
 
             setTimeout(() => {
-                compressBtn.textContent = 'Compress PDFs';
+                compressBtn.textContent = 'Compress PDF';
                 compressBtn.disabled = false;
-                alert('Compression complete! Download your files.');
-                // Here you would typically provide a download link for the compressed files
-            }, 2000);
+
+                // Simulate a compressed file (dummy download link)
+                const compressedFileUrl = URL.createObjectURL(new Blob(['Simulated compressed PDF content'], { type: 'application/pdf' }));
+                downloadBtn.href = compressedFileUrl;
+                downloadBtn.download = 'compressed.pdf'; // Set the download filename
+                downloadLink.style.display = 'block'; // Show the download link
+            }, 2000); // Simulate a 2-second compression process
         });
     </script>
 </body>
